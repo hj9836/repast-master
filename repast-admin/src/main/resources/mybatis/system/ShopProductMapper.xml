@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.aaa.repast.admin.project.system.product.mapper.ProductMapper">
+<mapper namespace="com.aaa.repast.admin.project.system.shopProduct.mapper.ShopProductMapper">
     
-    <resultMap type="Product" id="ProductResult">
+    <resultMap type="com.aaa.repast.admin.project.system.shopProduct.domain.ShopProduct" id="ShopProductResult">
         <result property="id"    column="id"    />
         <result property="shopId"    column="shop_id"    />
         <result property="brandId"    column="brand_id"    />
@@ -50,8 +50,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, shop_id, brand_id, product_category_id, product_attribute_category_id, name, pic, product_sn, delete_status, publish_status, new_status, recommand_status, sort, sale, price, promotion_price, gift_point, sub_title, description, original_price, stock, low_stock, unit, weight, service_ids, keywords, note, album_id, detail_title, detail_desc, detail_html, detail_mobile_html, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, brand_name, product_category_name, currency from pms_product
     </sql>
 	
-    <select id="selectProductList" parameterType="Product" resultMap="ProductResult">
-        <include refid="selectProductVo"/>
+    <select id="selectProductList" parameterType="com.aaa.repast.admin.project.system.shopProduct.domain.ShopProduct" resultMap="ShopProductResult">
+        select pp.id, pp.shop_id, pp.brand_id, pp.product_category_id, pp.product_attribute_category_id, pp.name, pp.pic, pp.product_sn, pp.delete_status, pp.publish_status, pp.new_status, pp.recommand_status, pp.sort, pp.sale, pp.price, pp.promotion_price, pp.gift_point, pp.sub_title, pp.description, pp.original_price, pp.stock, pp.low_stock, pp.unit, pp.weight, pp.service_ids, pp.keywords, pp.note, pp.album_id, pp.detail_title, pp.detail_desc, pp.detail_html, pp.detail_mobile_html, pp.promotion_start_time, pp.promotion_end_time, pp.promotion_per_limit, pp.promotion_type, pp.brand_name, pp.product_category_name, pp.currency from pms_product pp
+        inner join ums_shop_information usi on usi.id = pp.shop_id
+        inner join sys_user su on su.user_id = usi.owner_id
         <where>  
             <if test="id != null "> and id = #{id}</if>
              <if test="shopId != null "> and shop_id = #{shopId}</if>
@@ -92,15 +94,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="brandName != null  and brandName != '' "> and brand_name = #{brandName}</if>
              <if test="productCategoryName != null  and productCategoryName != '' "> and product_category_name = #{productCategoryName}</if>
              <if test="currency != null "> and currency = #{currency}</if>
+             <if test="albumId == null "> and su.user_id = 1</if>
          </where>
     </select>
     
-    <select id="selectProductById" parameterType="Long" resultMap="ProductResult">
+    <select id="selectProductById" parameterType="Long" resultMap="ShopProductResult">
         <include refid="selectProductVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertProduct" parameterType="Product">
+    <insert id="insertProduct" parameterType="com.aaa.repast.admin.project.system.shopProduct.domain.ShopProduct">
         insert into pms_product
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null  ">id,</if>
@@ -186,7 +189,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 	 
-    <update id="updateProduct" parameterType="Product">
+    <update id="updateProduct" parameterType="com.aaa.repast.admin.project.system.shopProduct.domain.ShopProduct">
         update pms_product
         <trim prefix="SET" suffixOverrides=",">
             <if test="shopId != null  ">shop_id = #{shopId},</if>

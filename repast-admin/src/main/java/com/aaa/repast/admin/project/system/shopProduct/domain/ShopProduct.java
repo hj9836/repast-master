@@ -1,8 +1,8 @@
-package com.aaa.repast.admin.project.system.product.domain;
+package com.aaa.repast.admin.project.system.shopProduct.domain;
 
+import com.aaa.repast.admin.framework.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.aaa.repast.admin.framework.web.domain.BaseEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Seven Lee
  * @date 2019-12-04
  */
-public class Product extends BaseEntity
+public class ShopProduct extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -448,47 +448,48 @@ public class Product extends BaseEntity
 		return currency;
 	}
 
+    @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("shopId", getShopId())
-            .append("brandId", getBrandId())
-            .append("productCategoryId", getProductCategoryId())
-            .append("productAttributeCategoryId", getProductAttributeCategoryId())
-            .append("name", getName())
-            .append("pic", getPic())
-            .append("productSn", getProductSn())
-            .append("deleteStatus", getDeleteStatus())
-            .append("publishStatus", getPublishStatus())
-            .append("newStatus", getNewStatus())
-            .append("recommandStatus", getRecommandStatus())
-            .append("sort", getSort())
-            .append("sale", getSale())
-            .append("price", getPrice())
-            .append("promotionPrice", getPromotionPrice())
-            .append("giftPoint", getGiftPoint())
-            .append("subTitle", getSubTitle())
-            .append("description", getDescription())
-            .append("originalPrice", getOriginalPrice())
-            .append("stock", getStock())
-            .append("lowStock", getLowStock())
-            .append("unit", getUnit())
-            .append("weight", getWeight())
-            .append("serviceIds", getServiceIds())
-            .append("keywords", getKeywords())
-            .append("note", getNote())
-            .append("albumId", getAlbumId())
-            .append("detailTitle", getDetailTitle())
-            .append("detailDesc", getDetailDesc())
-            .append("detailHtml", getDetailHtml())
-            .append("detailMobileHtml", getDetailMobileHtml())
-            .append("promotionStartTime", getPromotionStartTime())
-            .append("promotionEndTime", getPromotionEndTime())
-            .append("promotionPerLimit", getPromotionPerLimit())
-            .append("promotionType", getPromotionType())
-            .append("brandName", getBrandName())
-            .append("productCategoryName", getProductCategoryName())
-            .append("currency", getCurrency())
-            .toString();
+        return "ShopProduct{" +
+                "id=" + id +
+                ", shopId=" + shopId +
+                ", brandId=" + brandId +
+                ", productCategoryId=" + productCategoryId +
+                ", productAttributeCategoryId=" + productAttributeCategoryId +
+                ", name='" + name + '\'' +
+                ", pic='" + pic + '\'' +
+                ", productSn='" + productSn + '\'' +
+                ", deleteStatus=" + deleteStatus +
+                ", publishStatus=" + publishStatus +
+                ", newStatus=" + newStatus +
+                ", recommandStatus=" + recommandStatus +
+                ", sort=" + sort +
+                ", sale=" + sale +
+                ", price=" + price +
+                ", promotionPrice=" + promotionPrice +
+                ", giftPoint=" + giftPoint +
+                ", subTitle='" + subTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", originalPrice=" + originalPrice +
+                ", stock=" + stock +
+                ", lowStock=" + lowStock +
+                ", unit='" + unit + '\'' +
+                ", weight=" + weight +
+                ", serviceIds='" + serviceIds + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", note='" + note + '\'' +
+                ", albumId=" + albumId +
+                ", detailTitle='" + detailTitle + '\'' +
+                ", detailDesc='" + detailDesc + '\'' +
+                ", detailHtml='" + detailHtml + '\'' +
+                ", detailMobileHtml='" + detailMobileHtml + '\'' +
+                ", promotionStartTime=" + promotionStartTime +
+                ", promotionEndTime=" + promotionEndTime +
+                ", promotionPerLimit=" + promotionPerLimit +
+                ", promotionType=" + promotionType +
+                ", brandName='" + brandName + '\'' +
+                ", productCategoryName='" + productCategoryName + '\'' +
+                ", currency=" + currency +
+                '}';
     }
 }
