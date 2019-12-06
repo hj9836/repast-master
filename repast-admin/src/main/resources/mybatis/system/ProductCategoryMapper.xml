@@ -16,6 +16,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="keywords"    column="keywords"    />
         <result property="description"    column="description"    />
     </resultMap>
+
+    <resultMap id="CanteenDataMap" type="com.aaa.repast.admin.project.tool.redisTools.domain.CanTeenDateVo">
+        <result column="catId" property="catId" jdbcType="BIGINT"/>
+        <result column="catName" property="catName" jdbcType="VARCHAR"/>
+        <result column="shopId" property="shopId" jdbcType="BIGINT"/>
+        <collection property="data" ofType="com.aaa.repast.admin.project.tool.redisTools.domain.MemberProduct">
+            <result column="id" property="productId" jdbcType="BIGINT"/>
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="pic" property="pic" jdbcType="VARCHAR"/>
+            <result column="price" property="price" jdbcType="DECIMAL"/>
+            <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL"/>
+            <result column="member_price" property="memberPrice" jdbcType="DECIMAL"/>
+            <result column="sale" property="sale" jdbcType="INTEGER"/>
+            <result column="description" property="description" jdbcType="LONGVARCHAR"/>
+            <result column="promotion_type" property="promotionType" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="ShopInfoMap" type="com.aaa.repast.admin.project.tool.redisTools.domain.ShopInfoCutom">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="owner_id" property="ownerId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="borough" property="borough" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="lng" property="lng" jdbcType="VARCHAR"/>
+        <result column="lat" property="lat" jdbcType="VARCHAR"/>
+        <result column="closed" property="closed" jdbcType="TINYINT"/>
+        <result column="open_time" property="openTime" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="images" property="images" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="auth_start_time" property="authStartTime" jdbcType="TIMESTAMP"/>
+        <result column="auth_long" property="authLong" jdbcType="INTEGER"/>
+        <result column="template_id" property="templateId" jdbcType="INTEGER"/>
+        <result column="business_license" property="businessLicense" jdbcType="VARCHAR"/>
+        <result column="food_license" property="foodLicense" jdbcType="VARCHAR"/>
+        <result column="sanitation_license" property="sanitationLicense" jdbcType="VARCHAR"/>
+        <result column="assess" property="assess" jdbcType="VARCHAR"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <collection property="shopInfoFacilities" ofType="com.aaa.repast.admin.project.tool.redisTools.domain.ShopInfoFacility">
+            <result column="title" property="title" jdbcType="VARCHAR"></result>
+            <result column="icon" property="icon" jdbcType="VARCHAR"></result>
+        </collection>
+
+    </resultMap>
+
 	
 	<sql id="selectProductCategoryVo">
         select id, shop_id, parent_id, name, level, show_status, sort, icon, keywords, description from pms_product_category
@@ -96,5 +144,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-    
+
+    <select id="getCanteenDateByShopId" parameterType="java.lang.Long" resultMap="CanteenDataMap">
+    SELECT p.shop_id shopId,pc.id catId,pc.`name` catName,p.id,p.`name`,p.pic,p.price,p.promotion_price,p.sale,mp.member_price,p.description,p.promotion_type
+	FROM pms_product p
+	INNER JOIN pms_product_category pc on p.shop_id = pc.shop_id AND p.product_category_id = pc.id
+	LEFT JOIN pms_member_price mp on p.id = mp.product_id
+	WHERE p.shop_id = #{shopId}
+    </select>
+
+    <select id="getShopAllInfoLAOYANG" parameterType="java.lang.Long" resultMap="ShopInfoMap">
+ SELECT i.id,i.`name`,i.province,i.city,i.borough,i.address,i.lng,i.lat,i.closed,i.open_time,i.phone,i.images,i.`status`,i.auth_start_time authStartTime,i.auth_long authLong,f.title,f.description,f.icon
+ from ums_shop_information i
+	LEFT JOIN ums_shop_facility f on i.id = f.shop_id
+	where i.id = #{shopId}
+    </select>
 </mapper>

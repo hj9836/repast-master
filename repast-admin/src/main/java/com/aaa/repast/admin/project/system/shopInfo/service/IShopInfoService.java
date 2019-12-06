@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.shopInfo.service;
 
 import com.aaa.repast.admin.project.system.shopInformation.domain.ShopInformation;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 
 import java.util.List;
 
@@ -34,7 +36,7 @@ public interface IShopInfoService
      * @param shopInformation 店铺的基本信息
      * @return 结果
      */
-	public int insertShopInfo(ShopInformation shopInformation);
+	public int insertShopInfo(ShopInformation shopInformation, MyRedisService myRedisService, RedisService redisService);
 	
 	/**
      * 修改店铺的基本
@@ -42,7 +44,7 @@ public interface IShopInfoService
      * @param shopInformation 店铺的基本信息
      * @return 结果
      */
-	public int updateShopInfo(ShopInformation shopInformation);
+	public int updateShopInfo(ShopInformation shopInformation,MyRedisService myRedisService, RedisService redisService);
 		
 	/**
      * 删除店铺的基本信息
@@ -50,6 +52,6 @@ public interface IShopInfoService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int deleteShopInfoByIds(String ids);
+	public int deleteShopInfoByIds(String ids,Long shopId,MyRedisService myRedisService, RedisService redisService);
 	
 }

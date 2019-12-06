@@ -8,6 +8,8 @@ import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
 import com.aaa.repast.admin.project.system.productCategory.domain.ProductCategory;
 import com.aaa.repast.admin.project.system.productCategory.service.IProductCategoryService;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,12 @@ public class ProductCategoryController extends BaseController
 
 	@Autowired
 	private IProductCategoryService productCategoryService;
+
+	@Autowired
+	private MyRedisService myRedisService;
+
+	@Autowired
+	private RedisService redisService;
 
 	@RequiresPermissions("system:productCategory:view")
 	@GetMapping()
@@ -83,7 +91,7 @@ public class ProductCategoryController extends BaseController
 	@ResponseBody
 	public AjaxResult addSave(ProductCategory productCategory)
 	{
-		return toAjax(productCategoryService.insertProductCategory(productCategory));
+		return toAjax(productCategoryService.insertProductCategory(productCategory,myRedisService,redisService));
 	}
 
 	/**
@@ -106,7 +114,7 @@ public class ProductCategoryController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(ProductCategory productCategory)
 	{
-		return toAjax(productCategoryService.updateProductCategory(productCategory));
+		return toAjax(productCategoryService.updateProductCategory(productCategory,myRedisService,redisService));
 	}
 
 	/**
@@ -118,7 +126,8 @@ public class ProductCategoryController extends BaseController
 	@ResponseBody
 	public AjaxResult remove(String ids)
 	{
-		return toAjax(productCategoryService.deleteProductCategoryByIds(ids));
+		Long shopId=1l;
+		return toAjax(productCategoryService.deleteProductCategoryByIds(ids,shopId,myRedisService,redisService));
 	}
 
 }

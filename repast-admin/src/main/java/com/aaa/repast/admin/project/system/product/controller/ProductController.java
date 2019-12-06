@@ -7,6 +7,8 @@ import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +36,11 @@ public class ProductController extends BaseController
 	
 	@Autowired
 	private IProductService productService;
-	
+	@Autowired
+	private MyRedisService myRedisService;
+
+	@Autowired
+	private RedisService redisService;
 	@RequiresPermissions("system:product:view")
 	@GetMapping()
 	public String product()
@@ -86,8 +92,9 @@ public class ProductController extends BaseController
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(Product product)
-	{		
-		return toAjax(productService.insertProduct(product));
+	{
+
+		return toAjax(productService.insertProduct(product,myRedisService,redisService));
 	}
 
 	/**
@@ -110,7 +117,7 @@ public class ProductController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(Product product)
 	{		
-		return toAjax(productService.updateProduct(product));
+		return toAjax(productService.updateProduct(product,myRedisService,redisService));
 	}
 	
 	/**
@@ -121,8 +128,9 @@ public class ProductController extends BaseController
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{		
-		return toAjax(productService.deleteProductByIds(ids));
+	{
+		Long shopId =1l;
+		return toAjax(productService.deleteProductByIds(ids,shopId,myRedisService,redisService));
 	}
 	
 }

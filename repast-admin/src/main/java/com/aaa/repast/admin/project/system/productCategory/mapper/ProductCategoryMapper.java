@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.productCategory.mapper;
 
 import com.aaa.repast.admin.project.system.productCategory.domain.ProductCategory;
+import com.aaa.repast.admin.project.tool.redisTools.domain.CanTeenDateVo;
+import com.aaa.repast.admin.project.tool.redisTools.domain.ShopInfoCutom;
 
 import java.util.List;
 
@@ -59,5 +61,29 @@ public interface ProductCategoryMapper
 	 * @return 结果
 	 */
 	public int deleteProductCategoryByIds(String[] ids);
+
+	//————————————————————————————————————laoyang——————————————————————————————————————————————
+
+	List<CanTeenDateVo> getCanteenDateByShopId(Long shopId);
+
+
+	ShopInfoCutom getShopAllInfoLAOYANG(Long shopId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//————————————————————————————————————laoyang——————————————————————————————————————————————
 
 }

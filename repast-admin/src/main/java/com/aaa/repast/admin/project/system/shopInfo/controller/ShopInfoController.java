@@ -8,6 +8,8 @@ import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
 import com.aaa.repast.admin.project.system.shopInfo.service.IShopInfoService;
 import com.aaa.repast.admin.project.system.shopInformation.domain.ShopInformation;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,12 @@ public class ShopInfoController extends BaseController
 	
 	@Autowired
 	private IShopInfoService shopInformationService;
+
+	@Autowired
+	private MyRedisService myRedisService;
+
+	@Autowired
+	private RedisService redisService;
 	
 	@RequiresPermissions("system:shopInfo:view")
 	@GetMapping()
@@ -82,8 +90,10 @@ public class ShopInfoController extends BaseController
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(ShopInformation shopInformation)
-	{		
-		return toAjax(shopInformationService.insertShopInfo(shopInformation));
+	{
+		System.out.println("添加店铺被调用");
+		return toAjax(shopInformationService.insertShopInfo(shopInformation,myRedisService,redisService));
+
 	}
 
 	/**
@@ -106,7 +116,7 @@ public class ShopInfoController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(ShopInformation shopInformation)
 	{		
-		return toAjax(shopInformationService.updateShopInfo(shopInformation));
+		return toAjax(shopInformationService.updateShopInfo(shopInformation,myRedisService,redisService));
 	}
 	
 	/**
@@ -117,8 +127,8 @@ public class ShopInfoController extends BaseController
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{		
-		return toAjax(shopInformationService.deleteShopInfoByIds(ids));
+	{		Long shopId =1l;
+		return toAjax(shopInformationService.deleteShopInfoByIds(ids,shopId,myRedisService,redisService));
 	}
 	
 }
