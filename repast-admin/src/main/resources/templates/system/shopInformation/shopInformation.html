@@ -189,7 +189,16 @@
 				{
 					field : 'closed', 
 					title : '是否打烊',
-					sortable: true
+					sortable: true,
+					formatter:function (value, row, index) {
+						if (row.closed==0){
+							return '是';
+						}else{
+							return '否';
+						}
+					}
+
+
 				},
 				{
 					field : 'openTime', 
@@ -208,8 +217,19 @@
 				},
 				{
 					field : 'status',
-					title : '（店铺状态）0：冻结状态，1：正常，2：违规关闭，3：店铺到期关闭',
-					sortable: true
+					title : '店铺状态',
+					sortable: true,
+					formatter:function (value, row, index) {
+						if(row.status==0){
+							return '冻结状态';
+						}if (row.status==1){
+							return '正常';
+						}if (row.status==2){
+							return '违规关闭';
+						}else{
+							return '店铺到期关闭';
+						}
+					}
 				},
 				{
 					field : 'authStartTime',
