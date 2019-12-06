@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * 启动程序
- * 
+ * 12323
  * @author Seven
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
