@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.repast.admin.project.system.productCategory.mapper.ProductCategoryMapper">
+    
+    <resultMap type="ProductCategory" id="ProductCategoryResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="name"    column="name"    />
+        <result property="level"    column="level"    />
+        <result property="showStatus"    column="show_status"    />
+        <result property="sort"    column="sort"    />
+        <result property="icon"    column="icon"    />
+        <result property="keywords"    column="keywords"    />
+        <result property="description"    column="description"    />
+    </resultMap>
+	
+	<sql id="selectProductCategoryVo">
+        select id, shop_id, parent_id, name, level, show_status, sort, icon, keywords, description from pms_product_category
+    </sql>
+	
+    <select id="selectProductCategoryList" parameterType="ProductCategory" resultMap="ProductCategoryResult">
+        <include refid="selectProductCategoryVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="parentId != null "> and parent_id = #{parentId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="level != null "> and level = #{level}</if>
+             <if test="showStatus != null "> and show_status = #{showStatus}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="icon != null  and icon != '' "> and icon = #{icon}</if>
+             <if test="keywords != null  and keywords != '' "> and keywords = #{keywords}</if>
+             <if test="description != null  and description != '' "> and description = #{description}</if>
+         </where>
+    </select>
+    
+    <select id="selectProductCategoryById" parameterType="Long" resultMap="ProductCategoryResult">
+        <include refid="selectProductCategoryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProductCategory" parameterType="ProductCategory">
+        insert into pms_product_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="parentId != null  ">parent_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="level != null  ">level,</if>
+			<if test="showStatus != null  ">show_status,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="icon != null  and icon != ''  ">icon,</if>
+			<if test="keywords != null  and keywords != ''  ">keywords,</if>
+			<if test="description != null  and description != ''  ">description,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="parentId != null  ">#{parentId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="level != null  ">#{level},</if>
+			<if test="showStatus != null  ">#{showStatus},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="icon != null  and icon != ''  ">#{icon},</if>
+			<if test="keywords != null  and keywords != ''  ">#{keywords},</if>
+			<if test="description != null  and description != ''  ">#{description},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateProductCategory" parameterType="ProductCategory">
+        update pms_product_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="parentId != null  ">parent_id = #{parentId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="level != null  ">level = #{level},</if>
+            <if test="showStatus != null  ">show_status = #{showStatus},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="icon != null  and icon != ''  ">icon = #{icon},</if>
+            <if test="keywords != null  and keywords != ''  ">keywords = #{keywords},</if>
+            <if test="description != null  and description != ''  ">description = #{description},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProductCategoryById" parameterType="Long">
+        delete from pms_product_category where id = #{id}
+    </delete>
+	
+    <delete id="deleteProductCategoryByIds" parameterType="String">
+        delete from pms_product_category where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

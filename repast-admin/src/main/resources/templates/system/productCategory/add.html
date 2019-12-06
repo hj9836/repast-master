@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	<form class="form-horizontal m" id="form-productCategory-add">
+		<div class="form-group">
+			<label class="col-sm-3 control-label">店铺ID：</label>
+			<div class="col-sm-8">
+				<input type="text" id="shopId" name="shopId"  class="form-control" value="1">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">商品类目名：</label>
+			<div class="col-sm-8">
+				<input id="name" name="name" class="form-control" type="text">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-3 control-label">上级分类的编号：</label>
+			<div class="col-sm-8">
+				<select class="form-control" name="parentId">
+					<option selected="" >请选择</option>
+					<option value="0" >一级</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-3 control-label">分类级别：</label>
+			<div class="col-sm-8">
+				<select class="form-control" name="level">
+					<option selected="" >请选择</option>
+					<option value="0" >一级</option>
+					<option value="1" >二级</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">显示状态：</label>
+			<div class="col-sm-8">
+				<select class="form-control" name="level">
+					<option selected="" >请选择</option>
+					<option value="0" >不显示</option>
+					<option value="1" >显示</option>
+				</select>
+			</div>
+		</div>
+		<!--<div class="form-group">
+			<label class="col-sm-3 control-label">：</label>
+			<div class="col-sm-8">
+				<input id="sort" name="sort" class="form-control" type="text">
+			</div>
+		</div>-->
+		<div class="form-group">
+			<label class="col-sm-3 control-label">图标：</label>
+			<div class="col-sm-8">
+				<input id="icon" name="icon" class="form-control" type="text">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">关键字：</label>
+			<div class="col-sm-8">
+				<input id="keywords" name="keywords" class="form-control" type="text">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">描述：</label>
+			<div class="col-sm-8">
+				<input id="description" name="description" class="form-control" type="text">
+			</div>
+		</div>
+	</form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+	var prefix = ctx + "system/productCategory"
+	$("#form-productCategory-add").validate({
+		rules:{
+			xxxx:{
+				required:true,
+			},
+		}
+	});
+
+	function submitHandler() {
+		if ($.validate.form()) {
+			$.operate.save(prefix + "/add", $('#form-productCategory-add').serialize());
+		}
+	}
+</script>
+</body>
+</html>
