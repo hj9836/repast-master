@@ -321,7 +321,7 @@ public class Product extends BaseEntity
 	{
 		return serviceIds;
 	}
-	public void setKeywords(String keywords) 
+	public void setKeywords(String keywords)
 	{
 		this.keywords = keywords;
 	}
