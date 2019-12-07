@@ -151,22 +151,50 @@
 				{
 					field : 'deleteStatus',
 					title : '删除状态',
-					sortable: true
+					sortable: true,
+					formatter: function(value, line, index) {
+						if(line.deleteStatus == 0){
+							return '未删除';
+						}else{
+							return '删除';
+						}
+					}
 				},
 				{
 					field : 'publishStatus',
 					title : '上架状态',
-					sortable: true
+					sortable: true,
+					formatter: function (value,line,index) {
+						if(line.publishStatus == 0){
+							return '下架';
+						}else{
+							return '上架';
+						}
+					}
 				},
 				{
 					field : 'newStatus',
 					title : '新品状态',
-					sortable: true
+					sortable: true,
+					formatter:function (value, line, index) {
+						if(line.newStatus == 0){
+							return '不是新品';
+						}else{
+							return '新品';
+						}
+					}
 				},
 				{
 					field : 'recommandStatus',
 					title : '推荐状态',
-					sortable: true
+					sortable: true,
+					formatter:function(value, line, index) {
+						if(line.recommandStatus == 0){
+							return '不推荐';
+						}else{
+							return '推荐';
+						}
+				}
 				},
 				/*{
 					field : 'sort',
@@ -301,7 +329,14 @@
 				{
 					field : 'currency',
 					title : '币种',
-					sortable: true
+					sortable: true,
+					formatter:function (value, line, index) {
+						if(line.currency == 0){
+							return '人民币';
+						}else{
+							return '积分';
+						}
+					}
 				},
 				{
 					title: '操作',

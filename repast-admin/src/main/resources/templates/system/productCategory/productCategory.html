@@ -116,12 +116,26 @@
 				{
 					field : 'level',
 					title : '分类级别',
-					sortable: true
+					sortable: true,
+					formatter: function(value, line, index){
+						if(line.level == 0){
+							return '一级';
+						}else{
+							return '二级';
+						}
+					}
 				},
 				{
 					field : 'showStatus',
 					title : '显示状态',
-					sortable: true
+					sortable: true,
+					formatter: function (value, line, index) {
+						if(line.showStatus == 0){
+							return '不显示';
+						}else{
+							return '显示';
+						}
+					}
 				},
 				/*{
 					field : 'sort',
