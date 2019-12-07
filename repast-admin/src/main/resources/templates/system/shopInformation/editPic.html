@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-shopInformation-editPic" th:object="${shopInformation}">
+        <input id="id" name="id" th:field="*{id}"  type="hidden">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">商家实景照片URL：</label>
+            <div class="col-sm-8">
+                <input id="imagesImg" class="form-control" type="file" name="imagesImg">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">营业执照图片链接：</label>
+            <div class="col-sm-8">
+                <input id="businessLicenseImg" class="form-control" type="file" name="businessLicenseImg">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">食品安全许可证图片链接：</label>
+            <div class="col-sm-8">
+                <input id="foodLicenseImg" class="form-control" type="file" name="foodLicenseImg">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">卫生许可证图片链接：</label>
+            <div class="col-sm-8">
+                <input id="sanitationLicenseImg" class="form-control" type="file" name="sanitationLicenseImg">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">量化考核图片链接：</label>
+            <div class="col-sm-8">
+                <input id="assessImg" class="form-control" type="file" name="assessImg">
+            </div>
+        </div>
+    </form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    var prefix = ctx + "system/shopInformation"
+    $("#form-shopInformation-edit").validate({
+        rules:{
+            xxxx:{
+                required:true,
+            },
+        }
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.savePic(prefix + "/editPic", new FormData($("#form-shopInformation-editPic")[0]));
+        }
+    };
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //格子主题
+        laydate.render({
+            elem: '#authStartTime'
+        });
+    })
+</script>
+</body>
+</html>

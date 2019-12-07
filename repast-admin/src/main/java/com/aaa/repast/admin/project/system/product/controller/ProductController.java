@@ -141,6 +141,7 @@ public class ProductController extends BaseController
 	public AjaxResult editPicSave(Product product) {
 
 		System.out.println("查看文件原名称："+product.getPicFile().getOriginalFilename());
+		//TODO 老杨别忘了加代码
 		return null;
 	}
 	/**

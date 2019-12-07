@@ -3,6 +3,8 @@ package com.aaa.repast.admin.project.system.shopInformation.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.aaa.repast.admin.framework.web.domain.BaseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 
 /**
@@ -17,6 +19,11 @@ public class ShopInformation extends BaseEntity
 	
 	/** 老李说这个是shop_id */
 	private Long id;
+	private MultipartFile imagesImg;
+	private MultipartFile businessLicenseImg;
+	private MultipartFile foodLicenseImg;
+	private MultipartFile sanitationLicenseImg;
+	private MultipartFile assessImg;
 	/** 店铺所有者ID */
 	private Long ownerId;
 	/** 店铺名称 */
@@ -60,229 +67,256 @@ public class ShopInformation extends BaseEntity
 	/** 合同ID */
 	private Long contractId;
 
-	public void setId(Long id) 
-	{
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getId() 
-	{
-		return id;
+	public MultipartFile getImagesImg() {
+		return imagesImg;
 	}
-	public void setOwnerId(Long ownerId) 
-	{
+
+	public void setImagesImg(MultipartFile imagesImg) {
+		this.imagesImg = imagesImg;
+	}
+
+	public MultipartFile getBusinessLicenseImg() {
+		return businessLicenseImg;
+	}
+
+	public void setBusinessLicenseImg(MultipartFile businessLicenseImg) {
+		this.businessLicenseImg = businessLicenseImg;
+	}
+
+	public MultipartFile getFoodLicenseImg() {
+		return foodLicenseImg;
+	}
+
+	public void setFoodLicenseImg(MultipartFile foodLicenseImg) {
+		this.foodLicenseImg = foodLicenseImg;
+	}
+
+	public MultipartFile getSanitationLicenseImg() {
+		return sanitationLicenseImg;
+	}
+
+	public void setSanitationLicenseImg(MultipartFile sanitationLicenseImg) {
+		this.sanitationLicenseImg = sanitationLicenseImg;
+	}
+
+	public MultipartFile getAssessImg() {
+		return assessImg;
+	}
+
+	public void setAssessImg(MultipartFile assessImg) {
+		this.assessImg = assessImg;
+	}
+
+	public Long getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
 	}
 
-	public Long getOwnerId() 
-	{
-		return ownerId;
+	public String getName() {
+		return name;
 	}
-	public void setName(String name) 
-	{
+
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getName() 
-	{
-		return name;
+	public String getProvince() {
+		return province;
 	}
-	public void setProvince(String province) 
-	{
+
+	public void setProvince(String province) {
 		this.province = province;
 	}
 
-	public String getProvince() 
-	{
-		return province;
+	public String getCity() {
+		return city;
 	}
-	public void setCity(String city) 
-	{
+
+	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public String getCity() 
-	{
-		return city;
+	public String getBorough() {
+		return borough;
 	}
-	public void setBorough(String borough) 
-	{
+
+	public void setBorough(String borough) {
 		this.borough = borough;
 	}
 
-	public String getBorough() 
-	{
-		return borough;
+	public String getAddress() {
+		return address;
 	}
-	public void setAddress(String address) 
-	{
+
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public String getAddress() 
-	{
-		return address;
+	public String getLng() {
+		return lng;
 	}
-	public void setLng(String lng) 
-	{
+
+	public void setLng(String lng) {
 		this.lng = lng;
 	}
 
-	public String getLng() 
-	{
-		return lng;
+	public String getLat() {
+		return lat;
 	}
-	public void setLat(String lat) 
-	{
+
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 
-	public String getLat() 
-	{
-		return lat;
+	public Integer getClosed() {
+		return closed;
 	}
-	public void setClosed(Integer closed) 
-	{
+
+	public void setClosed(Integer closed) {
 		this.closed = closed;
 	}
 
-	public Integer getClosed() 
-	{
-		return closed;
+	public String getOpenTime() {
+		return openTime;
 	}
-	public void setOpenTime(String openTime) 
-	{
+
+	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
 	}
 
-	public String getOpenTime() 
-	{
-		return openTime;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhone(String phone) 
-	{
+
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public String getPhone() 
-	{
-		return phone;
+	public String getImages() {
+		return images;
 	}
-	public void setImages(String images) 
-	{
+
+	public void setImages(String images) {
 		this.images = images;
 	}
 
-	public String getImages() 
-	{
-		return images;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setStatus(Integer status) 
-	{
+
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public Integer getStatus() 
-	{
-		return status;
+	public Date getAuthStartTime() {
+		return authStartTime;
 	}
-	public void setAuthStartTime(Date authStartTime) 
-	{
+
+	public void setAuthStartTime(Date authStartTime) {
 		this.authStartTime = authStartTime;
 	}
 
-	public Date getAuthStartTime() 
-	{
-		return authStartTime;
+	public Integer getAuthLong() {
+		return authLong;
 	}
-	public void setAuthLong(Integer authLong) 
-	{
+
+	public void setAuthLong(Integer authLong) {
 		this.authLong = authLong;
 	}
 
-	public Integer getAuthLong() 
-	{
-		return authLong;
+	public Integer getTemplateId() {
+		return templateId;
 	}
-	public void setTemplateId(Integer templateId) 
-	{
+
+	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
 	}
 
-	public Integer getTemplateId() 
-	{
-		return templateId;
+	public String getBusinessLicense() {
+		return businessLicense;
 	}
-	public void setBusinessLicense(String businessLicense) 
-	{
+
+	public void setBusinessLicense(String businessLicense) {
 		this.businessLicense = businessLicense;
 	}
 
-	public String getBusinessLicense() 
-	{
-		return businessLicense;
+	public String getFoodLicense() {
+		return foodLicense;
 	}
-	public void setFoodLicense(String foodLicense) 
-	{
+
+	public void setFoodLicense(String foodLicense) {
 		this.foodLicense = foodLicense;
 	}
 
-	public String getFoodLicense() 
-	{
-		return foodLicense;
+	public String getSanitationLicense() {
+		return sanitationLicense;
 	}
-	public void setSanitationLicense(String sanitationLicense) 
-	{
+
+	public void setSanitationLicense(String sanitationLicense) {
 		this.sanitationLicense = sanitationLicense;
 	}
 
-	public String getSanitationLicense() 
-	{
-		return sanitationLicense;
+	public String getAssess() {
+		return assess;
 	}
-	public void setAssess(String assess) 
-	{
+
+	public void setAssess(String assess) {
 		this.assess = assess;
 	}
 
-	public String getAssess() 
-	{
-		return assess;
-	}
-	public void setContractId(Long contractId) 
-	{
-		this.contractId = contractId;
-	}
-
-	public Long getContractId() 
-	{
+	public Long getContractId() {
 		return contractId;
 	}
 
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("ownerId", getOwnerId())
-            .append("name", getName())
-            .append("province", getProvince())
-            .append("city", getCity())
-            .append("borough", getBorough())
-            .append("address", getAddress())
-            .append("lng", getLng())
-            .append("lat", getLat())
-            .append("closed", getClosed())
-            .append("openTime", getOpenTime())
-            .append("phone", getPhone())
-            .append("images", getImages())
-            .append("status", getStatus())
-            .append("authStartTime", getAuthStartTime())
-            .append("authLong", getAuthLong())
-            .append("templateId", getTemplateId())
-            .append("businessLicense", getBusinessLicense())
-            .append("foodLicense", getFoodLicense())
-            .append("sanitationLicense", getSanitationLicense())
-            .append("assess", getAssess())
-            .append("contractId", getContractId())
-            .toString();
-    }
+	public void setContractId(Long contractId) {
+		this.contractId = contractId;
+	}
+
+	@Override
+	public String toString() {
+		return "ShopInformation{" +
+				"id=" + id +
+				", imagesImg=" + imagesImg +
+				", businessLicenseImg=" + businessLicenseImg +
+				", foodLicenseImg=" + foodLicenseImg +
+				", sanitationLicenseImg=" + sanitationLicenseImg +
+				", assessImg=" + assessImg +
+				", ownerId=" + ownerId +
+				", name='" + name + '\'' +
+				", province='" + province + '\'' +
+				", city='" + city + '\'' +
+				", borough='" + borough + '\'' +
+				", address='" + address + '\'' +
+				", lng='" + lng + '\'' +
+				", lat='" + lat + '\'' +
+				", closed=" + closed +
+				", openTime='" + openTime + '\'' +
+				", phone='" + phone + '\'' +
+				", images='" + images + '\'' +
+				", status=" + status +
+				", authStartTime=" + authStartTime +
+				", authLong=" + authLong +
+				", templateId=" + templateId +
+				", businessLicense='" + businessLicense + '\'' +
+				", foodLicense='" + foodLicense + '\'' +
+				", sanitationLicense='" + sanitationLicense + '\'' +
+				", assess='" + assess + '\'' +
+				", contractId=" + contractId +
+				'}';
+	}
 }
