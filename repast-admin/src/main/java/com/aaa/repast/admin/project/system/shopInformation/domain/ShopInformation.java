@@ -19,11 +19,11 @@ public class ShopInformation extends BaseEntity
 	
 	/** 老李说这个是shop_id */
 	private Long id;
-	private MultipartFile imagesImg;
-	private MultipartFile businessLicenseImg;
-	private MultipartFile foodLicenseImg;
-	private MultipartFile sanitationLicenseImg;
-	private MultipartFile assessImg;
+	private MultipartFile imagesImg=null;
+	private MultipartFile businessLicenseImg=null;
+	private MultipartFile foodLicenseImg=null;
+	private MultipartFile sanitationLicenseImg=null;
+	private MultipartFile assessImg=null;
 	/** 店铺所有者ID */
 	private Long ownerId;
 	/** 店铺名称 */

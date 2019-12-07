@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.shopProductCategory.service;
 
 import com.aaa.repast.admin.project.system.shopProductCategory.domain.ShopProductCategory;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 
 import java.util.List;
 
@@ -34,7 +36,7 @@ public interface IShopProductCategoryService
      * @param ShopProductCategory 产品分类信息
      * @return 结果
      */
-	public int insertProductCategory(ShopProductCategory shopProductCategory);
+	public int insertProductCategory(ShopProductCategory shopProductCategory, MyRedisService myRedisService, RedisService redisService);
 	
 	/**
      * 修改产品分类
@@ -42,7 +44,7 @@ public interface IShopProductCategoryService
      * @param ShopProductCategory 产品分类信息
      * @return 结果
      */
-	public int updateProductCategory(ShopProductCategory shopProductCategory);
+	public int updateProductCategory(ShopProductCategory shopProductCategory, MyRedisService myRedisService, RedisService redisService);
 		
 	/**
      * 删除产品分类信息
@@ -50,7 +52,7 @@ public interface IShopProductCategoryService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int deleteProductCategoryByIds(String ids);
+	public int deleteProductCategoryByIds(String ids,Long shopId, MyRedisService myRedisService, RedisService redisService);
 
 	public List<ShopProductCategory> selectAllCategory();
 	

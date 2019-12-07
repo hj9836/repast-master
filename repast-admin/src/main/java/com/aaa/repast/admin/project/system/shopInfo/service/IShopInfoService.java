@@ -36,7 +36,7 @@ public interface IShopInfoService
      * @param shopInformation 店铺的基本信息
      * @return 结果
      */
-	public int insertShopInfo(ShopInformation shopInformation, MyRedisService myRedisService, RedisService redisService);
+	public int insertShopInfo(ShopInformation shopInformation,MyRedisService myRedisService, RedisService redisService);
 	
 	/**
      * 修改店铺的基本

@@ -5,6 +5,7 @@ import com.aaa.repast.admin.project.tool.redisTools.domain.CanTeenDateVo;
 import com.aaa.repast.admin.project.tool.redisTools.domain.ShopInfoCutom;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 产品分类 数据层
@@ -68,6 +69,17 @@ public interface ProductCategoryMapper
 
 
 	ShopInfoCutom getShopAllInfoLAOYANG(Long shopId);
+
+	Integer updateShopImagesById(Map<String,String> map);
+
+	Integer updateShopBusinessLicenseById(Map<String,String> map);
+
+	Integer updateShopFoodLicensecById(Map<String,String> map);
+
+	Integer updateShopSanitationLicenseById(Map<String,String> map);
+
+	Integer updateShopAssessById(Map<String,String> map);
+
 
 
 

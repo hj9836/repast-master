@@ -88,12 +88,12 @@ public class ProductCategoryServiceImpl implements IProductCategoryService
 	public int updateProductCategory(ProductCategory productCategory, MyRedisService myRedisService, RedisService redisService) {
 		System.out.println("这是修改菜单方法的被修改数据"+productCategory);
 		Long shopId = productCategory.getShopId();
-		shopId =1l;
+		shopId =1L;
 		int i = productCategoryMapper.updateProductCategory(productCategory);
-		//新增redis方法：如果执行行数大于1，则覆盖redis数据
+		//新增redis方法：如果执行行数大于0，则覆盖redis数据
 		//因为改变的是店铺菜单信息，所以对应的商品和目录都要进行覆盖，需要首先执行查询方法
 		if (i>0){
-			boolean b = myRedisService.coverShopMenuAndProductByShopIdInRedis(shopId, redisService);
+			boolean b = myRedisService.coverShopMenuAndProductByShopIdInRedis(shopId,redisService);
 			if (b!=true){
 				System.out.println("redis覆盖canteen数据失败！");
 

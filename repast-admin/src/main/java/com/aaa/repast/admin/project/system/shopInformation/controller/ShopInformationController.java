@@ -7,6 +7,9 @@ import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
+import com.aaa.repast.admin.ftp.service.UploadService;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.shopInformation.domain.ShopInformation;
 import com.aaa.repast.admin.project.system.shopInformation.service.IShopInformationService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 店铺的基本 信息操作处理
@@ -34,6 +39,15 @@ public class ShopInformationController extends BaseController
 	
 	@Autowired
 	private IShopInformationService shopInformationService;
+
+	@Autowired
+	private UploadService uploadService;
+
+	@Autowired
+	private MyRedisService myRedisService;
+
+	@Autowired
+	private RedisService redisService;
 	
 	@RequiresPermissions("system:shopInformation:view")
 	@GetMapping()
@@ -87,7 +101,7 @@ public class ShopInformationController extends BaseController
 	@ResponseBody
 	public AjaxResult addSave(ShopInformation shopInformation)
 	{		
-		return toAjax(shopInformationService.insertShopInformation(shopInformation));
+		return toAjax(shopInformationService.insertShopInformation(shopInformation,myRedisService,redisService));
 	}
 
 	/**
@@ -121,7 +135,7 @@ public class ShopInformationController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(ShopInformation shopInformation)
 	{		
-		return toAjax(shopInformationService.updateShopInformation(shopInformation));
+		return toAjax(shopInformationService.updateShopInformation(shopInformation,myRedisService,redisService));
 	}
 
 	/**
@@ -131,9 +145,18 @@ public class ShopInformationController extends BaseController
 	@Log(title = "店铺的基本", businessType = BusinessType.UPDATE)
 	@PostMapping("/editPic")
 	@ResponseBody
-	public AjaxResult editPicSave(ShopInformation shopInformation)
+	public AjaxResult editPicSave(ShopInformation shopInformation, HttpServletRequest request)
 	{
-		System.out.println(shopInformation);
+		System.out.println("查看+量化考核图片+源文件名"+shopInformation.getAssessImg());
+		System.out.println("查看+卫生许可+源文件名"+shopInformation.getSanitationLicenseImg().getOriginalFilename());
+		System.out.println("查看+食品安全许可证+源文件名"+shopInformation.getFoodLicenseImg().getOriginalFilename());
+		System.out.println("查看+营业执照+源文件名"+shopInformation.getBusinessLicenseImg().getOriginalFilename());
+		System.out.println("查看+商家实景+源文件名"+shopInformation.getImagesImg().getOriginalFilename());
+
+		Long shopId = shopInformation.getId();
+		System.out.println("查看需要修改的店铺的shopId："+shopId);
+		uploadService.uploadShopPicAjax(shopInformation,request,shopId);
+
 		//TODO 老杨别忘了加代码
 		return null;
 	}
@@ -146,8 +169,8 @@ public class ShopInformationController extends BaseController
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{		
-		return toAjax(shopInformationService.deleteShopInformationByIds(ids));
+	{	Long shopId =1l;
+		return toAjax(shopInformationService.deleteShopInformationByIds(ids,shopId,myRedisService,redisService));
 	}
 	
 }

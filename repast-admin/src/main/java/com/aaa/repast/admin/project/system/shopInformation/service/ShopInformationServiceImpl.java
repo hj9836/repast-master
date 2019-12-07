@@ -1,5 +1,7 @@
 package com.aaa.repast.admin.project.system.shopInformation.service;
 
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 import com.aaa.repast.common.support.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,9 +52,25 @@ public class ShopInformationServiceImpl implements IShopInformationService
      * @return 结果
      */
 	@Override
-	public int insertShopInformation(ShopInformation shopInformation)
+	public int insertShopInformation(ShopInformation shopInformation,MyRedisService myRedisService, RedisService redisService)
 	{
-	    return shopInformationMapper.insertShopInformation(shopInformation);
+		//新增商品的redis相关操作和修改一样，方法可复用
+		System.out.println("这是新增商品方法的数据"+shopInformation);
+		Long shopId = shopInformation.getId();
+		shopId =1l;
+		int i = shopInformationMapper.insertShopInformation(shopInformation);
+		//新增redis方法：如果执行行数大于1，则覆盖redis数据
+		//因为改变的是店铺菜单信息，所以对应的商品和目录都要进行覆盖，需要首先执行查询方法
+		if (i>0){
+			boolean b = myRedisService.coverShopInfoByShopIdInRedis(shopId, redisService);
+			if (b!=true){
+				System.out.println("redis覆盖canteen数据失败！");
+
+			}
+
+		}
+
+		return i;
 	}
 	
 	/**
@@ -62,9 +80,25 @@ public class ShopInformationServiceImpl implements IShopInformationService
      * @return 结果
      */
 	@Override
-	public int updateShopInformation(ShopInformation shopInformation)
+	public int updateShopInformation(ShopInformation shopInformation,MyRedisService myRedisService, RedisService redisService)
 	{
-	    return shopInformationMapper.updateShopInformation(shopInformation);
+		//新增商品的redis相关操作和修改一样，方法可复用
+		System.out.println("这是新增商品方法的数据"+shopInformation);
+		Long shopId = shopInformation.getId();
+		shopId =1l;
+		int i = shopInformationMapper.updateShopInformation(shopInformation);
+		//新增redis方法：如果执行行数大于1，则覆盖redis数据
+		//因为改变的是店铺菜单信息，所以对应的商品和目录都要进行覆盖，需要首先执行查询方法
+		if (i>0){
+			boolean b = myRedisService.coverShopInfoByShopIdInRedis(shopId, redisService);
+			if (b!=true){
+				System.out.println("redis覆盖canteen数据失败！");
+
+			}
+
+		}
+
+		return i;
 	}
 
 	/**
@@ -74,8 +108,15 @@ public class ShopInformationServiceImpl implements IShopInformationService
      * @return 结果
      */
 	@Override
-	public int deleteShopInformationByIds(String ids)
+	public int deleteShopInformationByIds(String ids,Long shopId,MyRedisService myRedisService, RedisService redisService)
 	{
+		//删除如果失败是否能说明redis宕机？不能，有可能是网络传输问题导致的删除失败
+		//解决方式：
+		//		1、再试一次，加延时器
+		//	本次编写暂时不考虑超时情况，默认删除失败为redis宕机，不会造成redis引起的脏读
+
+		Long delstatus = myRedisService.deleteShopInfomationByShopIdInRedis(shopId,redisService);
+		System.out.println("service层中删除目录方法查看redis中受影响的行数="+delstatus);
 		return shopInformationMapper.deleteShopInformationByIds(Convert.toStrArray(ids));
 	}
 	

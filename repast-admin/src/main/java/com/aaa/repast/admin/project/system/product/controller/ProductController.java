@@ -7,6 +7,7 @@ import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
+import com.aaa.repast.admin.ftp.service.UploadService;
 import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
 import com.aaa.repast.admin.redis.service.RedisService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aaa.repast.admin.project.system.product.domain.Product;
 import com.aaa.repast.admin.project.system.product.service.IProductService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 商品 信息操作处理
@@ -37,7 +40,10 @@ public class ProductController extends BaseController
 	@Autowired
 	private IProductService productService;
 	@Autowired
+	private UploadService uploadService;
+	@Autowired
 	private MyRedisService myRedisService;
+
 
 	@Autowired
 	private RedisService redisService;
@@ -138,10 +144,12 @@ public class ProductController extends BaseController
 	@Log(title = "商品图片", businessType = BusinessType.UPDATE)
 	@PostMapping("/editPic")
 	@ResponseBody
-	public AjaxResult editPicSave(Product product) {
+	public AjaxResult editPicSave(Product product, HttpServletRequest request) {
 
 		System.out.println("查看文件原名称："+product.getPicFile().getOriginalFilename());
-		//TODO 老杨别忘了加代码
+		Long productId = product.getId();
+		System.out.println("查看需要修改的商品的shopId："+productId);
+		uploadService.uploadProductPicAjax(product.getPicFile(),request,productId);
 		return null;
 	}
 	/**

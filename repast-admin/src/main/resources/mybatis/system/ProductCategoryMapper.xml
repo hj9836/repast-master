@@ -159,4 +159,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	LEFT JOIN ums_shop_facility f on i.id = f.shop_id
 	where i.id = #{shopId}
     </select>
+
+
+    <update id="updateProductPicById" parameterType="java.lang.String">
+    update pms_product set pic = #{PicPath}
+    where id = #{id}
+  </update>
+
+
+    <update id="updateShopImagesById" parameterType="java.lang.String">
+    update ums_shop_information set ${rowWord} = #{PicPath}
+    where id = #{id}
+  </update>
+
+    <update id="updateShopBusinessLicenseById" parameterType="java.lang.String">
+    update ums_shop_information set business_license = #{PicPath}
+    where id = #{id}
+  </update>
+    <update id="updateShopFoodLicensecById" parameterType="java.lang.String">
+    update ums_shop_information set food_license = #{PicPath}
+    where id = #{id}
+  </update>
+    <update id="updateShopSanitationLicenseById" parameterType="java.lang.String">
+    update ums_shop_information set sanitation_license = #{PicPath}
+    where id = #{id}
+  </update>
+    <update id="updateShopAssessById" parameterType="java.lang.String">
+    update ums_shop_information set assess = #{PicPath}
+    where id = #{id}
+  </update>
+
 </mapper>

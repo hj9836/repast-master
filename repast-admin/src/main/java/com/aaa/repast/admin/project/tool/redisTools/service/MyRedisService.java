@@ -26,9 +26,10 @@ public class MyRedisService {
         List<CanTeenDateVo> canteenDateByShopId = productCategoryMapper.getCanteenDateByShopId(shopId);
         String s = JSONUtil.toJsonString(canteenDateByShopId);
         //然后覆盖旧数据
+
         try{
             String setstatus = redisService.set(REDIS_SHOPMENUANDPRODUCT_KEY + shopId, s);
-            if ("OK".equals(setstatus.toUpperCase()))return true;
+            if ("OK".equals(setstatus.toUpperCase())){return true;}
         }catch (Exception e){
             e.printStackTrace();
 

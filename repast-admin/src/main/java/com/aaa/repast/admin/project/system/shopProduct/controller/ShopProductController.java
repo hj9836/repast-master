@@ -6,8 +6,11 @@ import com.aaa.repast.admin.framework.poi.ExcelUtil;
 import com.aaa.repast.admin.framework.web.controller.BaseController;
 import com.aaa.repast.admin.framework.web.domain.AjaxResult;
 import com.aaa.repast.admin.framework.web.page.TableDataInfo;
+import com.aaa.repast.admin.ftp.service.UploadService;
 import com.aaa.repast.admin.project.system.shopProduct.domain.ShopProduct;
 import com.aaa.repast.admin.project.system.shopProduct.service.IShopProductService;
+import com.aaa.repast.admin.project.tool.redisTools.service.MyRedisService;
+import com.aaa.repast.admin.redis.service.RedisService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,15 @@ public class ShopProductController extends BaseController
 	
 	@Autowired
 	private IShopProductService productService;
+
+	@Autowired
+	private UploadService uploadService;
+	@Autowired
+	private MyRedisService myRedisService;
+
+
+	@Autowired
+	private RedisService redisService;
 	
 	@RequiresPermissions("system:shopProduct:view")
 	@GetMapping()
@@ -83,7 +95,7 @@ public class ShopProductController extends BaseController
 	@ResponseBody
 	public AjaxResult addSave(ShopProduct shopProduct)
 	{		
-		return toAjax(productService.insertProduct(shopProduct));
+		return toAjax(productService.insertProduct(shopProduct,myRedisService,redisService));
 	}
 
 	/**
@@ -106,7 +118,7 @@ public class ShopProductController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(ShopProduct shopProduct)
 	{		
-		return toAjax(productService.updateProduct(shopProduct));
+		return toAjax(productService.updateProduct(shopProduct,myRedisService,redisService));
 	}
 	
 	/**
@@ -117,8 +129,8 @@ public class ShopProductController extends BaseController
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{		
-		return toAjax(productService.deleteProductByIds(ids));
+	{		Long shopId = 1l;
+		return toAjax(productService.deleteProductByIds(ids,shopId,myRedisService,redisService));
 	}
 	
 }
