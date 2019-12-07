@@ -502,6 +502,22 @@
             	}
             	$.modal.open("修改" + $.table._option.modalName, url);
             },
+			// 修改信息
+			editPic: function(id) {
+				var url = "/404.html";
+				if ($.common.isNotEmpty(id)) {
+					url = $.table._option.updatePicUrl.replace("{id}", id);
+				} else {
+					var id = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
+					if (id.length == 0) {
+						$.modal.alertWarning("请至少选择一条记录");
+						return;
+					}
+					url = $.table._option.updatePicUrl.replace("{id}", id);
+				}
+				$.modal.open("修改" + $.table._option.modalName, url);
+
+			},
             // 工具栏表格树修改
             editTree: function() {
             	var row = $('#bootstrap-tree-table').bootstrapTreeTable('getSelections')[0];
