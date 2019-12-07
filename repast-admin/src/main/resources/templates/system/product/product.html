@@ -91,6 +91,7 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
 	var editFlag = [[${@permission.hasPermi('system:product:edit')}]];
+	var editPicFlag = [[${@permission.hasPermi('system:product:editPic')}]];
 	var removeFlag = [[${@permission.hasPermi('system:product:remove')}]];
 	var prefix = ctx + "system/product";
 
@@ -99,6 +100,7 @@
 			url: prefix + "/list",
 			createUrl: prefix + "/add",
 			updateUrl: prefix + "/edit/{id}",
+			updatePicUrl: prefix + "/editPic/{id}",
 			removeUrl: prefix + "/remove",
 			exportUrl: prefix + "/export",
 			modalName: "商品",
@@ -343,6 +345,7 @@
 					align: 'center',
 					formatter: function(value, line, index) {
 						var actions = [];
+						actions.push('<a class="btn btn-success btn-xs ' + editPicFlag + '" href="#" onclick="$.operate.editPic(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑图片</a> ');
 						actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + line.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
 						actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + line.id + '\')"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
