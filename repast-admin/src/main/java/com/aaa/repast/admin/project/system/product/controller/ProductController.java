@@ -107,7 +107,18 @@ public class ProductController extends BaseController
 		mmap.put("product", product);
 	    return prefix + "/edit";
 	}
-	
+
+	/**
+	 * 修改商品图片按钮页面信息
+	 */
+	@GetMapping("/editPic/{id}")
+	public String editPic(@PathVariable("id") Long id, ModelMap mmap)
+	{
+		Product product = productService.selectProductById(id);
+		mmap.put("product", product);
+		return prefix + "/editPic";
+	}
+
 	/**
 	 * 修改保存商品
 	 */
@@ -119,7 +130,19 @@ public class ProductController extends BaseController
 	{		
 		return toAjax(productService.updateProduct(product,myRedisService,redisService));
 	}
-	
+
+	/**
+	 * 修改保存商品图片
+	 */
+	@RequiresPermissions("system:product:editPic")
+	@Log(title = "商品图片", businessType = BusinessType.UPDATE)
+	@PostMapping("/editPic")
+	@ResponseBody
+	public AjaxResult editPicSave(Product product) {
+
+		System.out.println("查看文件原名称："+product.getPicFile().getOriginalFilename());
+		return null;
+	}
 	/**
 	 * 删除商品
 	 */
@@ -129,7 +152,7 @@ public class ProductController extends BaseController
 	@ResponseBody
 	public AjaxResult remove(String ids)
 	{
-		Long shopId =1l;
+		Long shopId =1L;
 		return toAjax(productService.deleteProductByIds(ids,shopId,myRedisService,redisService));
 	}
 	

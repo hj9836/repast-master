@@ -542,6 +542,22 @@
         	    };
         	    $.ajax(config)
             },
+			//form表单上传图片
+			savePic: function(url,data) {
+				$.modal.loading("正在处理中，请稍后...");
+				var config = {
+					url: url,
+					type: "post",
+					dataType: "json",
+					data: data,
+					contentType : false,
+					processData : false,
+					success: function(result) {
+						$.operate.successCallback(result);
+					}
+				};
+				$.ajax(config)
+			},
             // 保存结果弹出msg刷新table表格
             ajaxSuccess: function (result) {
             	if (result.code == web_status.SUCCESS) {

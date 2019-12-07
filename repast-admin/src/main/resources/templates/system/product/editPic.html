@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<!--</style>-->
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+
+        <form class="form-horizontal m" id="form-product-editPic" th:object="${product}" enctype="application/x-www-form-urlencoded">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+            <label class="col-sm-3 control-label">店铺ID：</label>
+            <div class="col-sm-8">
+                <input id="shopId" name="shopId" th:field="*{shopId}" class="form-control" type="text">
+            </div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品图片：</label>
+				<div class="col-sm-8">
+                    <input id="picFile" th:field="*{picFile}" class="form-control" type="file" name="picFile">
+				</div>
+			</div>
+		</form>
+
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/product"
+		$("#form-product-editPic").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		function submitHandler() {
+			if ($.validate.form()) {
+				$.operate.savePic(prefix + "/editPic", new FormData($("#form-product-editPic")[0]));
+			}
+		};
+    </script>
+</body>
+</html>

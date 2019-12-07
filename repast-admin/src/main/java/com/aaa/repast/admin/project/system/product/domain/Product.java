@@ -3,6 +3,7 @@ package com.aaa.repast.admin.project.system.product.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.aaa.repast.admin.framework.web.domain.BaseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,6 +20,8 @@ public class Product extends BaseEntity
 	
 	/**  */
 	private Long id;
+
+	private MultipartFile picFile;
 	/** 店铺ID */
 	private Long shopId;
 	/** 品牌ID */
@@ -96,399 +99,373 @@ public class Product extends BaseEntity
 	/** 币种，0-> 人民币;  1-> 积分 */
 	private Integer currency;
 
-	public void setId(Long id) 
-	{
+	@Override
+	public String toString() {
+		return "Product{" +
+				"id=" + id +
+				", picFile=" + picFile +
+				", shopId=" + shopId +
+				", brandId=" + brandId +
+				", productCategoryId=" + productCategoryId +
+				", productAttributeCategoryId=" + productAttributeCategoryId +
+				", name='" + name + '\'' +
+				", pic='" + pic + '\'' +
+				", productSn='" + productSn + '\'' +
+				", deleteStatus=" + deleteStatus +
+				", publishStatus=" + publishStatus +
+				", newStatus=" + newStatus +
+				", recommandStatus=" + recommandStatus +
+				", sort=" + sort +
+				", sale=" + sale +
+				", price=" + price +
+				", promotionPrice=" + promotionPrice +
+				", giftPoint=" + giftPoint +
+				", subTitle='" + subTitle + '\'' +
+				", description='" + description + '\'' +
+				", originalPrice=" + originalPrice +
+				", stock=" + stock +
+				", lowStock=" + lowStock +
+				", unit='" + unit + '\'' +
+				", weight=" + weight +
+				", serviceIds='" + serviceIds + '\'' +
+				", keywords='" + keywords + '\'' +
+				", note='" + note + '\'' +
+				", albumId=" + albumId +
+				", detailTitle='" + detailTitle + '\'' +
+				", detailDesc='" + detailDesc + '\'' +
+				", detailHtml='" + detailHtml + '\'' +
+				", detailMobileHtml='" + detailMobileHtml + '\'' +
+				", promotionStartTime=" + promotionStartTime +
+				", promotionEndTime=" + promotionEndTime +
+				", promotionPerLimit=" + promotionPerLimit +
+				", promotionType=" + promotionType +
+				", brandName='" + brandName + '\'' +
+				", productCategoryName='" + productCategoryName + '\'' +
+				", currency=" + currency +
+				'}';
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getId() 
-	{
-		return id;
+	public MultipartFile getPicFile() {
+		return picFile;
 	}
-	public void setShopId(Long shopId) 
-	{
+
+	public void setPicFile(MultipartFile picFile) {
+		this.picFile = picFile;
+	}
+
+	public Long getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Long shopId) {
 		this.shopId = shopId;
 	}
 
-	public Long getShopId() 
-	{
-		return shopId;
+	public Long getBrandId() {
+		return brandId;
 	}
-	public void setBrandId(Long brandId) 
-	{
+
+	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
 
-	public Long getBrandId() 
-	{
-		return brandId;
+	public Long getProductCategoryId() {
+		return productCategoryId;
 	}
-	public void setProductCategoryId(Long productCategoryId) 
-	{
+
+	public void setProductCategoryId(Long productCategoryId) {
 		this.productCategoryId = productCategoryId;
 	}
 
-	public Long getProductCategoryId() 
-	{
-		return productCategoryId;
+	public Long getProductAttributeCategoryId() {
+		return productAttributeCategoryId;
 	}
-	public void setProductAttributeCategoryId(Long productAttributeCategoryId) 
-	{
+
+	public void setProductAttributeCategoryId(Long productAttributeCategoryId) {
 		this.productAttributeCategoryId = productAttributeCategoryId;
 	}
 
-	public Long getProductAttributeCategoryId() 
-	{
-		return productAttributeCategoryId;
+	public String getName() {
+		return name;
 	}
-	public void setName(String name) 
-	{
+
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getName() 
-	{
-		return name;
+	public String getPic() {
+		return pic;
 	}
-	public void setPic(String pic) 
-	{
+
+	public void setPic(String pic) {
 		this.pic = pic;
 	}
 
-	public String getPic() 
-	{
-		return pic;
+	public String getProductSn() {
+		return productSn;
 	}
-	public void setProductSn(String productSn) 
-	{
+
+	public void setProductSn(String productSn) {
 		this.productSn = productSn;
 	}
 
-	public String getProductSn() 
-	{
-		return productSn;
+	public Integer getDeleteStatus() {
+		return deleteStatus;
 	}
-	public void setDeleteStatus(Integer deleteStatus) 
-	{
+
+	public void setDeleteStatus(Integer deleteStatus) {
 		this.deleteStatus = deleteStatus;
 	}
 
-	public Integer getDeleteStatus() 
-	{
-		return deleteStatus;
+	public Integer getPublishStatus() {
+		return publishStatus;
 	}
-	public void setPublishStatus(Integer publishStatus) 
-	{
+
+	public void setPublishStatus(Integer publishStatus) {
 		this.publishStatus = publishStatus;
 	}
 
-	public Integer getPublishStatus() 
-	{
-		return publishStatus;
+	public Integer getNewStatus() {
+		return newStatus;
 	}
-	public void setNewStatus(Integer newStatus) 
-	{
+
+	public void setNewStatus(Integer newStatus) {
 		this.newStatus = newStatus;
 	}
 
-	public Integer getNewStatus() 
-	{
-		return newStatus;
+	public Integer getRecommandStatus() {
+		return recommandStatus;
 	}
-	public void setRecommandStatus(Integer recommandStatus) 
-	{
+
+	public void setRecommandStatus(Integer recommandStatus) {
 		this.recommandStatus = recommandStatus;
 	}
 
-	public Integer getRecommandStatus() 
-	{
-		return recommandStatus;
+	public Integer getSort() {
+		return sort;
 	}
-	public void setSort(Integer sort) 
-	{
+
+	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
 
-	public Integer getSort() 
-	{
-		return sort;
+	public Integer getSale() {
+		return sale;
 	}
-	public void setSale(Integer sale) 
-	{
+
+	public void setSale(Integer sale) {
 		this.sale = sale;
 	}
 
-	public Integer getSale() 
-	{
-		return sale;
+	public BigDecimal getPrice() {
+		return price;
 	}
-	public void setPrice(BigDecimal price) 
-	{
+
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
-	public BigDecimal getPrice() 
-	{
-		return price;
+	public BigDecimal getPromotionPrice() {
+		return promotionPrice;
 	}
-	public void setPromotionPrice(BigDecimal promotionPrice) 
-	{
+
+	public void setPromotionPrice(BigDecimal promotionPrice) {
 		this.promotionPrice = promotionPrice;
 	}
 
-	public BigDecimal getPromotionPrice() 
-	{
-		return promotionPrice;
+	public Integer getGiftPoint() {
+		return giftPoint;
 	}
-	public void setGiftPoint(Integer giftPoint) 
-	{
+
+	public void setGiftPoint(Integer giftPoint) {
 		this.giftPoint = giftPoint;
 	}
 
-	public Integer getGiftPoint() 
-	{
-		return giftPoint;
+	public String getSubTitle() {
+		return subTitle;
 	}
-	public void setSubTitle(String subTitle) 
-	{
+
+	public void setSubTitle(String subTitle) {
 		this.subTitle = subTitle;
 	}
 
-	public String getSubTitle() 
-	{
-		return subTitle;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescription(String description) 
-	{
+
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getDescription() 
-	{
-		return description;
+	public BigDecimal getOriginalPrice() {
+		return originalPrice;
 	}
-	public void setOriginalPrice(BigDecimal originalPrice) 
-	{
+
+	public void setOriginalPrice(BigDecimal originalPrice) {
 		this.originalPrice = originalPrice;
 	}
 
-	public BigDecimal getOriginalPrice() 
-	{
-		return originalPrice;
+	public Integer getStock() {
+		return stock;
 	}
-	public void setStock(Integer stock) 
-	{
+
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
 
-	public Integer getStock() 
-	{
-		return stock;
+	public Integer getLowStock() {
+		return lowStock;
 	}
-	public void setLowStock(Integer lowStock) 
-	{
+
+	public void setLowStock(Integer lowStock) {
 		this.lowStock = lowStock;
 	}
 
-	public Integer getLowStock() 
-	{
-		return lowStock;
+	public String getUnit() {
+		return unit;
 	}
-	public void setUnit(String unit) 
-	{
+
+	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 
-	public String getUnit() 
-	{
-		return unit;
+	public BigDecimal getWeight() {
+		return weight;
 	}
-	public void setWeight(BigDecimal weight) 
-	{
+
+	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
 	}
 
-	public BigDecimal getWeight() 
-	{
-		return weight;
+	public String getServiceIds() {
+		return serviceIds;
 	}
-	public void setServiceIds(String serviceIds) 
-	{
+
+	public void setServiceIds(String serviceIds) {
 		this.serviceIds = serviceIds;
 	}
 
-	public String getServiceIds() 
-	{
-		return serviceIds;
+	public String getKeywords() {
+		return keywords;
 	}
-	public void setKeywords(String keywords)
-	{
+
+	public void setKeywords(String keywords) {
 		this.keywords = keywords;
 	}
 
-	public String getKeywords() 
-	{
-		return keywords;
+	public String getNote() {
+		return note;
 	}
-	public void setNote(String note) 
-	{
+
+	public void setNote(String note) {
 		this.note = note;
 	}
 
-	public String getNote() 
-	{
-		return note;
+	public Long getAlbumId() {
+		return albumId;
 	}
-	public void setAlbumId(Long albumId) 
-	{
+
+	public void setAlbumId(Long albumId) {
 		this.albumId = albumId;
 	}
 
-	public Long getAlbumId() 
-	{
-		return albumId;
+	public String getDetailTitle() {
+		return detailTitle;
 	}
-	public void setDetailTitle(String detailTitle) 
-	{
+
+	public void setDetailTitle(String detailTitle) {
 		this.detailTitle = detailTitle;
 	}
 
-	public String getDetailTitle() 
-	{
-		return detailTitle;
+	public String getDetailDesc() {
+		return detailDesc;
 	}
-	public void setDetailDesc(String detailDesc) 
-	{
+
+	public void setDetailDesc(String detailDesc) {
 		this.detailDesc = detailDesc;
 	}
 
-	public String getDetailDesc() 
-	{
-		return detailDesc;
+	public String getDetailHtml() {
+		return detailHtml;
 	}
-	public void setDetailHtml(String detailHtml) 
-	{
+
+	public void setDetailHtml(String detailHtml) {
 		this.detailHtml = detailHtml;
 	}
 
-	public String getDetailHtml() 
-	{
-		return detailHtml;
+	public String getDetailMobileHtml() {
+		return detailMobileHtml;
 	}
-	public void setDetailMobileHtml(String detailMobileHtml) 
-	{
+
+	public void setDetailMobileHtml(String detailMobileHtml) {
 		this.detailMobileHtml = detailMobileHtml;
 	}
 
-	public String getDetailMobileHtml() 
-	{
-		return detailMobileHtml;
+	public Date getPromotionStartTime() {
+		return promotionStartTime;
 	}
-	public void setPromotionStartTime(Date promotionStartTime) 
-	{
+
+	public void setPromotionStartTime(Date promotionStartTime) {
 		this.promotionStartTime = promotionStartTime;
 	}
 
-	public Date getPromotionStartTime() 
-	{
-		return promotionStartTime;
+	public Date getPromotionEndTime() {
+		return promotionEndTime;
 	}
-	public void setPromotionEndTime(Date promotionEndTime) 
-	{
+
+	public void setPromotionEndTime(Date promotionEndTime) {
 		this.promotionEndTime = promotionEndTime;
 	}
 
-	public Date getPromotionEndTime() 
-	{
-		return promotionEndTime;
+	public Integer getPromotionPerLimit() {
+		return promotionPerLimit;
 	}
-	public void setPromotionPerLimit(Integer promotionPerLimit) 
-	{
+
+	public void setPromotionPerLimit(Integer promotionPerLimit) {
 		this.promotionPerLimit = promotionPerLimit;
 	}
 
-	public Integer getPromotionPerLimit() 
-	{
-		return promotionPerLimit;
+	public Integer getPromotionType() {
+		return promotionType;
 	}
-	public void setPromotionType(Integer promotionType) 
-	{
+
+	public void setPromotionType(Integer promotionType) {
 		this.promotionType = promotionType;
 	}
 
-	public Integer getPromotionType() 
-	{
-		return promotionType;
+	public String getBrandName() {
+		return brandName;
 	}
-	public void setBrandName(String brandName) 
-	{
+
+	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
 
-	public String getBrandName() 
-	{
-		return brandName;
+	public String getProductCategoryName() {
+		return productCategoryName;
 	}
-	public void setProductCategoryName(String productCategoryName) 
-	{
+
+	public void setProductCategoryName(String productCategoryName) {
 		this.productCategoryName = productCategoryName;
 	}
 
-	public String getProductCategoryName() 
-	{
-		return productCategoryName;
-	}
-	public void setCurrency(Integer currency) 
-	{
-		this.currency = currency;
-	}
-
-	public Integer getCurrency() 
-	{
+	public Integer getCurrency() {
 		return currency;
 	}
 
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("shopId", getShopId())
-            .append("brandId", getBrandId())
-            .append("productCategoryId", getProductCategoryId())
-            .append("productAttributeCategoryId", getProductAttributeCategoryId())
-            .append("name", getName())
-            .append("pic", getPic())
-            .append("productSn", getProductSn())
-            .append("deleteStatus", getDeleteStatus())
-            .append("publishStatus", getPublishStatus())
-            .append("newStatus", getNewStatus())
-            .append("recommandStatus", getRecommandStatus())
-            .append("sort", getSort())
-            .append("sale", getSale())
-            .append("price", getPrice())
-            .append("promotionPrice", getPromotionPrice())
-            .append("giftPoint", getGiftPoint())
-            .append("subTitle", getSubTitle())
-            .append("description", getDescription())
-            .append("originalPrice", getOriginalPrice())
-            .append("stock", getStock())
-            .append("lowStock", getLowStock())
-            .append("unit", getUnit())
-            .append("weight", getWeight())
-            .append("serviceIds", getServiceIds())
-            .append("keywords", getKeywords())
-            .append("note", getNote())
-            .append("albumId", getAlbumId())
-            .append("detailTitle", getDetailTitle())
-            .append("detailDesc", getDetailDesc())
-            .append("detailHtml", getDetailHtml())
-            .append("detailMobileHtml", getDetailMobileHtml())
-            .append("promotionStartTime", getPromotionStartTime())
-            .append("promotionEndTime", getPromotionEndTime())
-            .append("promotionPerLimit", getPromotionPerLimit())
-            .append("promotionType", getPromotionType())
-            .append("brandName", getBrandName())
-            .append("productCategoryName", getProductCategoryName())
-            .append("currency", getCurrency())
-            .toString();
-    }
+	public void setCurrency(Integer currency) {
+		this.currency = currency;
+	}
 }
