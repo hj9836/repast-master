@@ -57,7 +57,7 @@ public class ProductServiceImpl implements IProductService
 		//新增商品的redis相关操作和修改一样，方法可复用
 		System.out.println("这是新增商品方法的数据"+product);
 		Long shopId = product.getShopId();
-		shopId =1l;
+		shopId =1L;
 		int i = productMapper.insertProduct(product);
 		//新增redis方法：如果执行行数大于1，则覆盖redis数据
 		//因为改变的是店铺菜单信息，所以对应的商品和目录都要进行覆盖，需要首先执行查询方法
@@ -85,7 +85,7 @@ public class ProductServiceImpl implements IProductService
 		//新增商品的redis相关操作和修改一样，方法可复用
 		System.out.println("这是修改商品方法的数据"+product);
 		Long shopId = product.getShopId();
-		shopId =1l;
+		shopId =1L;
 		int i = productMapper.updateProduct(product);
 		//新增redis方法：如果执行行数大于1，则覆盖redis数据
 		//因为改变的是店铺菜单信息，所以对应的商品和目录都要进行覆盖，需要首先执行查询方法
