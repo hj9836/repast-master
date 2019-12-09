@@ -43,7 +43,9 @@ public class UploadService {
         System.out.println("关键的一步!!查看源文件名称的字符长度!!："+imagesImg.getOriginalFilename().length());
 
 
-        /*if (imagesImg.getOriginalFilename()!=null&&imagesImg.getOriginalFilename()!=""){
+        /*
+                        ！！！这里常规杀空无效，字符串出来不是""，但length长度为0！！！
+        if (imagesImg.getOriginalFilename()!=null&&imagesImg.getOriginalFilename()!=""){
             System.out.println("进入"+"imagesImg"+"不为空中");
             Map<String, Object> imagesImgmap = new HashMap<>();
             imagesImgmap.put("row","images");
