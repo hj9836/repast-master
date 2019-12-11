@@ -94,10 +94,10 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">授权开始时间：</label>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">授权开始时间:</label>
 				<div class="col-sm-8">
-					<input id="authStartTime" name="authStartTime" th:field="*{authStartTime}" class="form-control" type="text">
+					<input type="text" class="form-control" id="authStartTime" placeholder="2019-12-07" th:field="*{authStartTime}">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -159,7 +159,15 @@
 	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/edit", $('#form-shopInformation-edit').serialize());
 	        }
-	    }
+	    };
+
+		layui.use('laydate', function(){
+			var laydate = layui.laydate;
+			//格子主题
+			laydate.render({
+				elem: '#authStartTime'
+			});
+		})
 	</script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.aaa.repast.admin.project.system.shopInformation.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import com.aaa.repast.admin.framework.aspectj.lang.annotation.Log;
 import com.aaa.repast.admin.framework.aspectj.lang.enums.BusinessType;
 import com.aaa.repast.admin.framework.poi.ExcelUtil;
@@ -155,10 +157,8 @@ public class ShopInformationController extends BaseController
 
 		Long shopId = shopInformation.getId();
 		System.out.println("查看需要修改的店铺的shopId："+shopId);
-		uploadService.uploadShopPicAjax(shopInformation,request,shopId);
-
-		//TODO 老杨别忘了加代码
-		return null;
+		uploadService.uploadShopPicAjax(shopInformation, request, shopId);
+		return AjaxResult.success();
 	}
 	
 	/**
@@ -169,7 +169,7 @@ public class ShopInformationController extends BaseController
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{	Long shopId =1l;
+	{	Long shopId =1L;
 		return toAjax(shopInformationService.deleteShopInformationByIds(ids,shopId,myRedisService,redisService));
 	}
 	

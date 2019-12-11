@@ -150,7 +150,7 @@ public class ProductController extends BaseController
 		Long productId = product.getId();
 		System.out.println("查看需要修改的商品的shopId："+productId);
 		uploadService.uploadProductPicAjax(product.getPicFile(),request,productId);
-		return null;
+		return AjaxResult.success();
 	}
 	/**
 	 * 删除商品
